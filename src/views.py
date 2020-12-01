@@ -20,6 +20,8 @@ class CropVideo(APIView):
         output_video = str(timezone.now()) + ".mp4"
         print(output_video)
         os.chdir("/var/www/html/UserTesting")
+        print(input_video)
+        print(os.getcwd())
         ffmpeg_extract_subclip(input_video, int(start_time), int(end_time), targetname=output_video)
         # x = os.listdir()
         # for y in x:
