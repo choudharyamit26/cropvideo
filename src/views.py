@@ -10,26 +10,14 @@ import os
 class CropVideo(APIView):
 
     def post(self, request, *args, **kwargs):
-        # start_time = self.request.POST.get('start_time')
-        # end_time = self.request.POST.get('end_time')
-        # input_video = self.request.POST.get('input_video')
         start_time = self.request.POST['start_time']
         end_time = self.request.POST['end_time']
         input_video = self.request.POST['input_video']
-
         output_video = str(timezone.now()) + ".mp4"
-        print(output_video)
-        os.chdir("/var/www/html/UserTesting")
-        print(input_video)
-        print('Checking input file', os.path.isfile(input_video))
-        print(os.getcwd())
-        ffmpeg_extract_subclip(input_video, int(start_time), int(end_time), targetname=output_video)
-        # x = os.listdir()
-        # for y in x:
-        #     print(y)
-        #     if y.endswith(".mp4"):
-        #         print(y)
-        #         print('>>>>>>>>>>', os.path.dirname(os.path.realpath(__file__)))
-        print('_______________________', os.path.abspath(output_video))
-        return Response({"message": "Video cropped successfully", "output_video_path": os.path.abspath(output_video),
-                         "output_video_name": output_video, "status": HTTP_200_OK})
+        try:
+            os.chdir("/var/www/html/UserTesting")
+            ffmpeg_extract_subclip(input_video, int(start_time), int(end_time), targetname=output_video)
+            return Response({"message": "Video cropped successfully", "output_video_path": os.path.abspath(output_video),"output_video_name": output_video, "status": HTTP_200_OK})
+        except Exception as e:
+            x = {"Error": str(e)}
+            return Response({"message": x["Error"], "status": HTTP_400_BAD_REQUEST})
