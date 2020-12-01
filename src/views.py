@@ -21,6 +21,7 @@ class CropVideo(APIView):
         print(output_video)
         os.chdir("/var/www/html/UserTesting")
         print(input_video)
+        print('Checking input file', os.path.isfile(input_video))
         print(os.getcwd())
         ffmpeg_extract_subclip(input_video, int(start_time), int(end_time), targetname=output_video)
         # x = os.listdir()
