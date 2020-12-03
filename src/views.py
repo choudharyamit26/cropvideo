@@ -19,5 +19,6 @@ class CropVideo(APIView):
             ffmpeg_extract_subclip(input_video, int(start_time), int(end_time), targetname=output_video)
             return Response({"message": "Video cropped successfully", "output_video_path": os.path.abspath(output_video),"output_video_name": output_video, "status": HTTP_200_OK})
         except Exception as e:
+            print(e)
             x = {"Error": str(e)}
             return Response({"message": x["Error"], "status": HTTP_400_BAD_REQUEST})
