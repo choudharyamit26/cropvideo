@@ -71,7 +71,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'cropvideo.wsgi.application'
 
-CORS_ALLOWED_ORIGINS = ["http://localhost:4200/", "http://3.6.100.194", "http://3.20.114.64"]
+CORS_ALLOWED_ORIGINS = ["*"]
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
